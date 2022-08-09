@@ -1,2 +1,5 @@
 data/genes
 data/temp
+data/mpro/*.png
+data/pdb/*
+results/*
