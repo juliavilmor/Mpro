@@ -43,6 +43,7 @@ def main():
 def organize_output_files():
     arg = parserfunc()
     outdir = arg.outdir
+    pdbdir = arg.pdbdir
 
     try:
         os.mkdir(outdir)
@@ -67,13 +68,22 @@ def organize_output_files():
         os.mkdir("water")
         os.mkdir("cof_ion")
     
-    for filename in os.listdir(outdir):
-        file = os.path.isfile(filename)
+    os.chdir('../')
+    for filename in os.listdir(pdbdir):
         if re.search("ligand", filename):
-            shutil.move("%s/%s"%(outdir, file), "%s/ligand/%s"%(outdir, file))
+            shutil.move("%s/%s"%(pdbdir, filename), "%s/ligand/%s"%(outdir, filename))
+        if re.search("receptor", filename):
+            shutil.move("%s/%s"%(pdbdir, filename), "%s/receptor/%s"%(outdir, filename))
+        if re.search("water", filename):
+            shutil.move("%s/%s"%(pdbdir, filename), "%s/water/%s"%(outdir, filename))
+        if re.search("cof_ion", filename):
+            shutil.move("%s/%s"%(pdbdir, filename), "%s/cof_ion/%s"%(outdir, filename))
 
 
 
 
 if __name__ == '__main__':
     main()
+    os.chdir('../')
+    organize_output_files()
+    
